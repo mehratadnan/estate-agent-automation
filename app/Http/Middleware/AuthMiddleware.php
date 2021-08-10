@@ -25,16 +25,17 @@ class AuthMiddleware extends BaseMiddleware
         if(!$head || !$jwt){
             return $this->response->unauthorized();
         }
-
         try{
             $secretKey = env('APP_KEY');
             $decoded = JWT::decode($jwt, $secretKey, array('HS256'));
             $request->attributes->add(['decoded' => $decoded, 'jwt' => $jwt]);
             //DB Token Valid Control
             $user = User::find($decoded->userID)->first();
+
             if(empty($user->access_token)){
                 return $this->response->unauthorized();
             }
+
             return $next($request);
         }catch (\Exception $e) {
             return $this->response->unauthorized();

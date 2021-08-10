@@ -23,4 +23,15 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         });
     });
 
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        // UserController ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        $router->group(['prefix' => '/user'], function () use ($router) {
+            $router->POST('/pagination', 'UserController\UserCrudController@pagination');
+            $router->POST('/add', 'UserController\UserCrudController@store');
+            $router->POST('/update/{id}', 'UserController\UserCrudController@update');
+            $router->delete('/delete/{id}', 'UserController\UserCrudController@destroy');
+            $router->get('/select/{id}', 'UserController\UserCrudController@show');
+        });
+    });
+
 });
