@@ -23,6 +23,15 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         });
     });
 
+    // AppointmentsController ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    $router->group(['prefix' => '/appointment'], function () use ($router) {
+        $router->POST('/pagination', 'AppointmentsController\AppointmentsCrudController@pagination');
+        $router->POST('/add', 'AppointmentsController\AppointmentsCrudController@store');
+        $router->POST('/update/{id}', 'AppointmentsController\AppointmentsCrudController@update');
+        $router->delete('/delete/{id}', 'AppointmentsController\AppointmentsCrudController@destroy');
+        $router->get('/select/{id}', 'AppointmentsController\AppointmentsCrudController@show');
+    });
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
         // UserController ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         $router->group(['prefix' => '/user'], function () use ($router) {

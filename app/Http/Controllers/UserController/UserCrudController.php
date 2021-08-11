@@ -189,6 +189,7 @@ class UserCrudController extends Controller
         if ($checkvalidation === true) {
             try {
                 $users = DB::table('users')
+                    ->select('fullName','email','phone','tempFreezing','gender','birthDate')
                     ->where('users.tempFreezing','=', $request->tempFreezing)
                     ->where(function ($query) use ($request) {
                         $query->Where('users.email','like','%'.$request->searchValue.'%')

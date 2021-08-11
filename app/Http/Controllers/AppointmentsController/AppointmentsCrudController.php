@@ -30,6 +30,7 @@
 namespace App\Http\Controllers\AppointmentsController;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,24 +44,17 @@ class AppointmentsCrudController extends Controller
      * @return JsonResponse|object
      */
 
-    //this Func will store user to database
+    //this Func will store Appointment to database
     public function store(Request $request)
     {
         // checkRequest Func checking requests
-        $checkvalidation = $this->checkRequest($request, "addUser","");
+        $checkvalidation = $this->checkRequest($request, "addAppointment","");
         if ($checkvalidation === true) {
             try {
-                // hash user's password
-                $password = Hash::make($request->password);
-
-                // edit password with hashed password
-                $request['password'] = $password;
-                // set type as Admin
-                $request['roleID'] = 1;
-
                 //store user typo database
-                User::create($request->all());
-                return $this->response->success(['message' => __("response.UserStoreSuccess")]);
+                Appointment::create($request->all());
+
+                return $this->response->success(['message' => __("response.AppointmentStoreSuccess")]);
 
             } catch (\Illuminate\Database\QueryException  $exception) {
                 return $this->response->fail(['message'=>$exception]);
@@ -76,39 +70,23 @@ class AppointmentsCrudController extends Controller
      * @return JsonResponse|object
      */
 
-    //this Func will update one user
+    //this Func will update one Appointment
     public function update(Request $request , $id)
     {
         // checkRequest Func checking requests
-        $checkvalidation = $this->checkRequest($request, "updateUser", $id);
+        $checkvalidation = $this->checkRequest($request, "updateAppointment", $id);
         if ($checkvalidation === true) {
             try {
-                // update user password if exist in request
-                if($request->has('password')){
-                    // hash user's password
-                    $password = Hash::make($request->password);
-                    // edit password with hashed password
-                    $request['password'] = $password;
-                }
+                // find Appointment  to update
+                $appointment = Appointment::find($id);
 
-                // date validate
-                if(strlen($request->birthDate) === 10){
-                    $request->birthDate = date_format(date_create($request->birthDate),"Y-m-d");
-                    if($request->birthDate >= date("Y-m-d")) {
-                        return $this->response->fail(['message'=>__("response.dateIsNotMatched")]);
-                    }
-                }else{
-                    $request['birthDate']=null;
-                }
 
-                // find user  to update
-                $user = User::find($id);
-                if (!empty($user)) {
-                    $user->update($request->all());
-                    return $this->response->success(['message'=>__("response.UserUpdateSuccess")]);
+                if (!empty($appointment)) {
+                    $appointment->update($request->all());
+                    return $this->response->success(['message'=>__("response.AppointmentUpdateSuccess")]);
 
                 }
-                return $this->response->fail(__("response.UserUpdateFail"));
+                return $this->response->fail(__("response.AppointmentUpdateFail"));
             } catch (\Illuminate\Database\QueryException  $exception) {
                 return $this->response->fail(['message'=>__("response.DatabaseError")]);
             }
@@ -122,7 +100,7 @@ class AppointmentsCrudController extends Controller
      * @return JsonResponse|object
      */
 
-    //this Func will delete one user byID
+    //this Func will delete one Appointment byID
 
     public function destroy(Request $request, $id)
     {
@@ -133,18 +111,18 @@ class AppointmentsCrudController extends Controller
             $id = trim(strip_tags($id));
             if (!empty($id)) {
                 try {
-                    // find user  to update
-                    $user = User::find($id);
-                    if (!empty($user)) {
-                        $user->update(['tempFreezing' => 1]);
-                        return $this->response->success(['message'=>__("response.UserDestroySuccess")]);
+                    // find Appointment  to update
+                    $appointment = Appointment::find($id);
+                    if (!empty($appointment)) {
+                        $appointment->update(['tempFreezing' => 1]);
+                        return $this->response->success(['message'=>__("response.AppointmentDestroySuccess")]);
                     }
-                    return $this->response->fail(__("response.UserDestroyFail"));
+                    return $this->response->fail(__("response.AppointmentDestroyFail"));
                 } catch (\Illuminate\Database\QueryException  $exception) {
                     return $this->response->fail(['message'=>__("response.DatabaseError")]);
                 }
             }
-            return $this->response->fail(['message'=>__("response.error")]);
+            return $this->response->fail(['message'=>__("response.AppointmentSelectionFail")]);
         }
         return $this->response->fail(['message'=>$checkvalidation]);
     }
@@ -155,7 +133,7 @@ class AppointmentsCrudController extends Controller
      * @return JsonResponse|object
      */
 
-    // this Func will return one user with his phone byID
+    // this Func will return one Appointment with his phone byID
     public function show(Request $request, $id)
     {
         // checkRequest Func checking requests
@@ -164,46 +142,55 @@ class AppointmentsCrudController extends Controller
             $id = trim(strip_tags($id));
             if (!empty($id)) {
                 try {
-                    // select user to show byID
-                    $user = User::find($id);
-                    if(!empty($user)){
-                        return $this->response->success(["data" => $user]);
+                    // select Appointment to show byID
+                    $appointment = Appointment::find($id);
+                    if(!empty($appointment)){
+                        return $this->response->success(["data" => $appointment]);
                     }
-                    return $this->response->fail(['message'=>__("response.UserSelectionFail")]);
+                    return $this->response->fail(['message'=>__("response.AppointmentSelectionFail")]);
                 }catch (\Exception  $exception) {
                     return $this->response->fail(['message'=>__("response.DatabaseError")]);
                 }
             }
-            return $this->response->fail(['message'=>__("response.UserSelectionFail")]);
+            return $this->response->fail(['message'=>__("response.AppointmentSelectionFail")]);
         }
         return $this->response->fail(['message'=>$checkvalidation]);
     }
 
 
-    // this Func will paginate all users with selected inputs
+    // this Func will paginate all Appointments with selected inputs
     public function pagination(Request $request )
     {
         // checkRequest Func checking requests
-        $checkvalidation = $this->checkRequest($request, "listUser","");
+        $checkvalidation = $this->checkRequest($request, "listAppointment","");
         if ($checkvalidation === true) {
             try {
-                $users = DB::table('users')
-                    ->where('users.tempFreezing','=', $request->tempFreezing)
+                $appointments = DB::table('appointments');
+                if(isset($request->date)  && !empty($request->date)  ){
+                    $appointments->where('appointments.date','=', $request->date );
+                }
+                if(isset($request->userID)  && !empty($request->userID)  ){
+                    $appointments->where('appointments.userID','=', $request->userID );
+                }
+                $appointments->where('appointments.tempFreezing','=', $request->tempFreezing)
                     ->where(function ($query) use ($request) {
-                        $query->Where('users.email','like','%'.$request->searchValue.'%')
-                            ->orWhere('users.fullName','like','%'.$request->searchValue.'%')
-                            ->orWhere('users.phone','like','%'.$request->searchValue.'%');
-                    })->paginate( $request->perPage,['*'],'users',$request->page)->toArray();
+                        $query->Where('appointments.email','like','%'.$request->searchValue.'%')
+                            ->orWhere('appointments.surname','like','%'.$request->searchValue.'%')
+                            ->orWhere('appointments.name','like','%'.$request->searchValue.'%')
+                            ->orWhere('appointments.phone','like','%'.$request->searchValue.'%');
+                    });
+
+                $appointments = $appointments->paginate( $request->perPage,['*'],'appointments',$request->page)->toArray();
 
                 // re decorator data by removing unneeded keys from json
-                $users = $this->removeUnneededDataFromPagination($users);
-                $total = $users[1];
-                $users = $users[0];
+                $appointments = $this->removeUnneededDataFromPagination($appointments);
+                $total = $appointments[1];
+                $appointments = $appointments[0];
 
-                return $this->response->success(["data" => $users   , "numberOfPage" => $total , "count" => count($users) ]);
+                return $this->response->success(["data" => $appointments   , "numberOfPage" => $total , "count" => count($appointments) ]);
 
             }catch (\Illuminate\Database\QueryException  $exception) {
-                return $this->response->fail(__("response.DatabaseError"));
+                return $this->response->fail(["asd"=>$exception]);
             }
         }else{
             return $this->response->fail($checkvalidation);
@@ -219,64 +206,41 @@ class AppointmentsCrudController extends Controller
     //checkRequest function to validate inputs
     private function checkRequest($request,$ctrl,$id)
     {
-        $decoded = $request->get('decoded');
-        $user = User::find($decoded->userID);
-
-        if($user->roleID != 0){
-            return "response.NoPermission";
-        }
-
-
         //Request Cleaning
         foreach ($request->all() as $key => $value) {
             if(!is_array($request[$key])){
                 $request[$key] = trim(strip_tags($request[$key]));
             }
         }
-        if($ctrl === "addUser"){
+        if($ctrl === "addAppointment"){
             //Request Validator
             $validate = $this->checkValidator($request, [
-                'email' => 'required|email|max:50|unique:users',
-                'fullName' => 'required|max:50|min:5',
-                'password' => [
-                    'required',
-                    'string',
-                    'max:64',
-                    'min:8',              // must be at least 8 characters in length
-                    'regex:/[a-z]/',      // must contain at least one lowercase letter
-                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                    'regex:/[0-9]/',      // must contain at least one digit
-                    'regex:/[@$!%*#?&]/', // must contain a special character
-                ],
+                'email' => 'required|email|max:50',
+                'name' => 'required|max:50|min:5',
+                'surname' => 'required|max:50|min:5',
                 'phone' => 'required|max:15|min:9',
+                'date' => 'required|max:10|date',
+                'address' => 'required|max:50|min:3',
             ]);
-        }else if($ctrl === "updateUser"){
+        }else if($ctrl === "updateAppointment"){
             //Request Validator
             $validate = $this->checkValidator($request, [
-                'email' => 'required|email|max:50|unique:users,email,'.$id.',userID',
-                'fullName' => 'required|max:50|min:5',
-                'password' => [
-                    'required',
-                    'string',
-                    'max:64',
-                    'min:8',              // must be at least 8 characters in length
-                    'regex:/[a-z]/',      // must contain at least one lowercase letter
-                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                    'regex:/[0-9]/',      // must contain at least one digit
-                    'regex:/[@$!%*#?&]/', // must contain a special character
-                ],
+                'email' => 'required|email|max:50',
+                'name' => 'required|max:50|min:5',
+                'surname' => 'required|max:50|min:5',
                 'phone' => 'required|max:15|min:9',
-                'gender' => 'max:1|integer',
-                'birthDate' => 'max:10|date',
-                'tempFreezing' => 'max:1|integer',
+                'date' => 'required|max:10|date',
+                'address' => 'required|max:50|min:3',
             ]);
-        }else if($ctrl === "listUser") {
+        }else if($ctrl === "listAppointment") {
             //Request Validator
             $validate = $this->checkValidator($request, [
                 'page' => 'required|max:25',
                 'perPage' => 'required|max:25',
                 'searchValue' => 'max:30',
-                'tempFreezing' => 'required|max:1'
+                'tempFreezing' => 'required|max:1',
+                'date' => 'max:10|min:10',
+                'userID' => 'integer|max:30',
             ]);
         }
 
