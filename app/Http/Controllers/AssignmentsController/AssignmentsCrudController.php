@@ -27,7 +27,7 @@
 */
 
 
-namespace App\Http\Controllers\AppointmentsController;
+namespace App\Http\Controllers\AssignmentsController;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
@@ -36,7 +36,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class AppointmentsCrudController extends Controller
+class AssignmentsCrudController extends Controller
 {
     /**
      * @param Request $request

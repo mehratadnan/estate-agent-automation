@@ -92,16 +92,6 @@ class UserCrudController extends Controller
                     $request['password'] = $password;
                 }
 
-                // date validate
-                if(strlen($request->birthDate) === 10){
-                    $request->birthDate = date_format(date_create($request->birthDate),"Y-m-d");
-                    if($request->birthDate >= date("Y-m-d")) {
-                        return $this->response->fail(['message'=>__("response.dateIsNotMatched")]);
-                    }
-                }else{
-                    $request['birthDate']=null;
-                }
-
                 // find user  to update
                 $user = User::find($id);
                 if (!empty($user)) {
@@ -269,7 +259,7 @@ class UserCrudController extends Controller
                 ],
                 'phone' => 'required|max:15|min:9',
                 'gender' => 'max:1|integer',
-                'birthDate' => 'max:10|date',
+                'birthDate' => 'max:10|date|date_format:Y-m-d|before:today',
                 'tempFreezing' => 'max:1|integer',
             ]);
         }else if($ctrl === "listUser") {

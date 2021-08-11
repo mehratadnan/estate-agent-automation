@@ -23,10 +23,13 @@ class CreateAppointmentsTable extends Migration
             $table->string("email",50);
 
             $table->date("date");
+            $table->string("time");
+
             $table->string("address",10);
+            $table->string("longAddress",100);
             $table->string("distance",20)->nullable();
-            $table->date("checkoutTime")->nullable();
-            $table->date("returnTime")->nullable();
+            $table->string("checkoutTime")->nullable();
+            $table->string("returnTime")->nullable();
 
             $table->tinyInteger("tempFreezing")->default(0)
                 ->comment = 'activate 0 / deactivate 1 ';

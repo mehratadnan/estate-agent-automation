@@ -11,36 +11,19 @@ class CurlServiceProvider
      * @param $data
      * @return array
      */
-    public function curl($url = "", $ssl = true, $data = [], $method = "GET",$headers = []){
+    public function get($url)
+    {
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-        if (!extension_loaded("curl")) {
-            return "Curl Extension Not Found!";
-        }
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
+        $response = curl_exec($curl);
+        curl_close($curl);
 
-        $ssl == true ? '' : $ssl = false;
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_PORT, 8080);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $ssl);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $ssl);
-
-        if(strtoupper($method) == "POST"){
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        }
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $result = curl_exec($ch);
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        return [
-            "code" => $httpcode,
-            "result" => $result
-        ];
+        return $response;
     }
 }
 
