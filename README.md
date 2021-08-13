@@ -3,8 +3,8 @@ a UK estate agent named Iceberg Estates; It has difficulty keeping records of wh
 
 
 **Documentation** 
-- https://documenter.getpostman.com/view/15155481/Tzz7NHwq   by this link you can access to postman documentation.
-- To try requests you can use (proje.postman_collection) file on postman.
+- https://documenter.getpostman.com/view/15155481/Tzz7NHwq  by this link you can access to postman documentation.
+- https://github.com/mehratadnan/estate-agent-automation/blob/main/proje.postman_collection.json by this link you can extract all requests from (proje.postman_collection) file on postman.
 
 
 **Default  User** 
