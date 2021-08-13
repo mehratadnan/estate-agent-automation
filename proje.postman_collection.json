@@ -1,0 +1,2733 @@
+{
+	"info": {
+		"_postman_id": "0445f5d2-5284-4dcf-84fc-841a60516b08",
+		"name": "proje",
+		"description": "a UK estate agent named Iceberg Estates; It has difficulty keeping records of which house its employees will show, when and to which customers. The company manager, who wants to use his employees more effectively, especially wants to be able to control the length of the appointments, the time they allocate for appointments, and all these appointments without conflicts. In order to solve these problems, the company needs an application that simulates the scenario.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AppointmentsCrudController",
+			"item": [
+				{
+					"name": "assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4NzY3OTUwLCJleHAiOjE2Mjg4MTExNTB9.5DkR7dLfSASSC3M35cIJ9yOTnik_wiBvGmsXJ14dR_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userID",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/update/assignment/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"update",
+								"assignment",
+								"1"
+							]
+						},
+						"description": "<h4>This request is to assignment Appointment to user</h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>userID*: required|integer|max:30</li>\n</ul>"
+					},
+					"response": [
+						{
+							"name": "invalid hours - assignment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userID",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": \"response.TheUserIsNotAvailableDuringTheseHours\"\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.0889\"\r\n}"
+						},
+						{
+							"name": "unauthorized  - assignment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userID",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0436\"\r\n}"
+						},
+						{
+							"name": "success - assignment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userID",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.AppointmentUpdateSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.0959\"\r\n}"
+						},
+						{
+							"name": "validation - assignment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userID",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": {\r\n                \"userID\": [\r\n                    \"The user i d field is required.\"\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.0741\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "addAppointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4NzczMzM0LCJleHAiOjE2Mjg4MTY1MzR9.X4OInPeAJqL7y_gihVxTKoRh0d1Wv0DjGd0GmFsqj8k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ahmet",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "ahmet",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "5522941075",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "adnan@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2021-10-22",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "CM12LB",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "16:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"add"
+							]
+						},
+						"description": "<h4>This request is to add Appointment </h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>email*: required|email|max:50</li>\n<li>name*: required|max:50|min:5</li>\n<li>surname*: required|max:50|min:5</li>\n<li>phone*: required|max:15|min:9</li>\n<li>date*: required|max:10|date|date_format:Y-m-d|after_or_equal:today</li>\n<li>time*: required|date_format:H:i|after:11:00|before:20:00</li>\n<li>address*: required|max:50|min:3</li>\n</ul>"
+					},
+					"response": [
+						{
+							"name": "success - addAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "adnan23",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "adnan223",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "222222222223",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com2",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.AppointmentStoreSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.6959\"\r\n}"
+						},
+						{
+							"name": "unauthorized - addAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "5522941075",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.1067\"\r\n}"
+						},
+						{
+							"name": "validation - addAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "5522941075",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": {\r\n                \"email\": [\r\n                    \"The email field is required.\"\r\n                ],\r\n                \"name\": [\r\n                    \"The name field is required.\"\r\n                ],\r\n                \"surname\": [\r\n                    \"The surname field is required.\"\r\n                ],\r\n                \"phone\": [\r\n                    \"The phone field is required.\"\r\n                ],\r\n                \"time\": [\r\n                    \"The time field is required.\"\r\n                ],\r\n                \"address\": [\r\n                    \"The address field is required.\"\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1273\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "updateAppointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4NzczMzM0LCJleHAiOjE2Mjg4MTY1MzR9.X4OInPeAJqL7y_gihVxTKoRh0d1Wv0DjGd0GmFsqj8k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "nurum",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "ahmet",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "05368329568",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "nur@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2022-11-11",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "CM27PR",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "11:22",
+									"type": "text"
+								},
+								{
+									"key": "tempFreezing",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "userID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"update",
+								"1"
+							]
+						},
+						"description": "<h4>This request is to update Appointment </h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>email*: required|email|max:50</li>\n<li>name*: required|max:50|min:5</li>\n<li>surname*: required|max:50|min:5</li>\n<li>phone*: required|max:15|min:9</li>\n<li>date*: required|max:10|date|date_format:Y-m-d|after_or_equal:today</li>\n<li>time*: required|date_format:H:i|after:11:00|before:20:00</li>\n<li>address*: required|max:50|min:3</li>\n<li>userID*: required|max:50|min:1</li>\n<li>tempFreezing*: required|max:1</li>\n</ul>"
+					},
+					"response": [
+						{
+							"name": "validation - updateAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ahmet",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "surname",
+											"value": "ahmet",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phone",
+											"value": "5522941075",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": {\r\n                \"email\": [\r\n                    \"The email field is required.\"\r\n                ],\r\n                \"name\": [\r\n                    \"The name field is required.\"\r\n                ],\r\n                \"surname\": [\r\n                    \"The surname field is required.\"\r\n                ],\r\n                \"phone\": [\r\n                    \"The phone field is required.\"\r\n                ],\r\n                \"time\": [\r\n                    \"The time field is required.\"\r\n                ],\r\n                \"address\": [\r\n                    \"The address field is required.\"\r\n                ],\r\n                \"userID\": [\r\n                    \"The user i d field is required.\"\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1262\"\r\n}"
+						},
+						{
+							"name": "unauthorized - addAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "5522941075",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.1067\"\r\n}"
+						},
+						{
+							"name": "success - updateAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "adnan23",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "adnan223",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "222222222223",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com2",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.AppointmentUpdateSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1917\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "done",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzk0NDA0LCJleHAiOjE2Mjg4Mzc2MDR9.KplZHh_0GLPHKrqizoFyh_X-_OYQ22CDc4FTxLuqU9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userID",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/update/assignment/done/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"update",
+								"assignment",
+								"done",
+								"33"
+							]
+						},
+						"description": "<h4>This request is to get Appointment </h4>\n<p><strong>inputs in the request  like below:</strong></p>\n<ul>\n    <li>appointmentID *: http://localhost:8005/api/appointment/update/{appointmentID }</li>\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - done",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/done/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"done",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0436\"\r\n}"
+						},
+						{
+							"name": "success - done",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/done/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"done",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.AppointmentUpdateSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1813\"\r\n}"
+						},
+						{
+							"name": "fail - done",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/update/assignment/done/55",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"update",
+										"assignment",
+										"done",
+										"55"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": \"response.AppointmentUpdateFail\"\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1352\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteAppointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzc0MDcyLCJleHAiOjE2Mjg4MTcyNzJ9.UCEIjyQfD3atWQsLGmVYEdq2oLbz7bAcrIJxjBt4mvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/delete/55",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"delete",
+								"55"
+							]
+						},
+						"description": "<h4>This request is to delete Appointment </h4>\n<p><strong>inputs in the request  like below:</strong></p>\n<ul>\n    <li>appointmentID *: http://localhost:8005/api/appointment/delete/{appointmentID }</li>\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - deleteAppointments",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - deleteAppointments",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.AppointmentDestroySuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.0841\"\r\n}"
+						},
+						{
+							"name": "fail - deleteAppointments",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": \"response.AppointmentDestroyFail\"\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1645\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "selectAppointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzc0MDcyLCJleHAiOjE2Mjg4MTcyNzJ9.UCEIjyQfD3atWQsLGmVYEdq2oLbz7bAcrIJxjBt4mvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/select/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"select",
+								"2"
+							]
+						},
+						"description": "<h4>This request is to select Appointment </h4>\n<p><strong>inputs in the request  like below:</strong></p>\n<ul>\n    <li>appointmentID *: http://localhost:8005/api/appointment/select/{appointmentID }</li>\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - selectAppointments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/select/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"select",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - selectAppointments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/select/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"select",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"appointmentID\": 2,\r\n        \"userID\": null,\r\n        \"name\": \"adnan23\",\r\n        \"surname\": \"adnan223\",\r\n        \"phone\": \"222222222223\",\r\n        \"email\": \"adnan@gmail.com2\",\r\n        \"date\": \"2021-10-22\",\r\n        \"time\": \"16:00\",\r\n        \"address\": \"CM12LB\",\r\n        \"longAddress\": \"England,Chelmsford,Essex,St Andrews\",\r\n        \"distance\": \"4.3 km\",\r\n        \"checkoutTime\": \"15:51\",\r\n        \"returnTime\": \"17:09\",\r\n        \"tempFreezing\": 1,\r\n        \"done\": 0,\r\n        \"created_at\": \"2021-08-12T13:02:40.000000Z\",\r\n        \"updated_at\": \"2021-08-12T13:14:38.000000Z\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1239\"\r\n}"
+						},
+						{
+							"name": "fail - selectAppointments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/select/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"select",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": \"response.AppointmentSelectionFail\"\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1201\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "listAppointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzk0NDA0LCJleHAiOjE2Mjg4Mzc2MDR9.KplZHh_0GLPHKrqizoFyh_X-_OYQ22CDc4FTxLuqU9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "perPage",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "searchValue",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tempFreezing",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "date",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "userID",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/appointment/pagination",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"appointment",
+								"pagination"
+							]
+						},
+						"description": "<h4>This request is to list Appointments </h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>page*: required|max:25</li>\n<li>perPage*: required|max:25</li>\n<li>tempFreezing*: required|max:1</li>\n<li>searchValue: max:30</li>\n<li>date: max:10|min:10</li>\n<li>userID*: integer|max:30</li>\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - listAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "perPage",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "searchValue",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "userID",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/pagination",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"pagination"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - listAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "perPage",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "searchValue",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "userID",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/pagination",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"pagination"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        {\r\n            \"appointmentID\": 1,\r\n            \"userID\": 3,\r\n            \"name\": \"nurum\",\r\n            \"surname\": \"ahmet\",\r\n            \"phone\": \"05368329568\",\r\n            \"email\": \"nur@gmail.com\",\r\n            \"date\": \"2022-11-11\",\r\n            \"time\": \"11:22\",\r\n            \"address\": \"CM27PR\",\r\n            \"longAddress\": \"England,Chelmsford,Essex,St Andrews\",\r\n            \"distance\": \"4.3 km\",\r\n            \"checkoutTime\": \"15:51\",\r\n            \"returnTime\": \"17:09\",\r\n            \"tempFreezing\": 0,\r\n            \"done\": 1,\r\n            \"created_at\": \"2021-08-12 13:02:38\",\r\n            \"updated_at\": \"2021-08-12 18:46:13\"\r\n        },\r\n        {\r\n            \"appointmentID\": 2,\r\n            \"userID\": 2,\r\n            \"name\": \"adnan23\",\r\n            \"surname\": \"adnan223\",\r\n            \"phone\": \"222222222223\",\r\n            \"email\": \"adnan@gmail.com2\",\r\n            \"date\": \"2021-10-22\",\r\n            \"time\": \"16:00\",\r\n            \"address\": \"CM12LB\",\r\n            \"longAddress\": \"England,Chelmsford,Essex,St Andrews\",\r\n            \"distance\": \"4.3 km\",\r\n            \"checkoutTime\": \"15:51\",\r\n            \"returnTime\": \"17:09\",\r\n            \"tempFreezing\": 0,\r\n            \"done\": 0,\r\n            \"created_at\": \"2021-08-12 13:02:40\",\r\n            \"updated_at\": \"2021-08-12 13:25:57\"\r\n        },\r\n        {\r\n            \"appointmentID\": 3,\r\n            \"userID\": 2,\r\n            \"name\": \"ahmet\",\r\n            \"surname\": \"ahmet\",\r\n            \"phone\": \"5522941075\",\r\n            \"email\": \"adnan@gmail.com\",\r\n            \"date\": \"2021-10-22\",\r\n            \"time\": \"16:00\",\r\n            \"address\": \"CM12LB\",\r\n            \"longAddress\": \"England,Chelmsford,Essex,St Andrews\",\r\n            \"distance\": \"4.3 km\",\r\n            \"checkoutTime\": \"15:51\",\r\n            \"returnTime\": \"17:09\",\r\n            \"tempFreezing\": 0,\r\n            \"done\": 1,\r\n            \"created_at\": \"2021-08-12 13:08:07\",\r\n            \"updated_at\": \"2021-08-12 13:30:35\"\r\n        }\r\n    ],\r\n    \"numberOfPage\": 1,\r\n    \"count\": 3,\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1324\"\r\n}"
+						},
+						{
+							"name": "validation - listAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "perPage",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "searchValue",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "userID",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/appointment/pagination",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"appointment",
+										"pagination"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"page\": [\r\n                \"The page field is required.\"\r\n            ],\r\n            \"perPage\": [\r\n                \"The per page field is required.\"\r\n            ],\r\n            \"tempFreezing\": [\r\n                \"The temp freezing field is required.\"\r\n            ]\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1535\"\r\n}"
+						}
+					]
+				}
+			],
+			"description": "<h3>this collection is about create, read, update, delete and other operations with Appointments </h3>"
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4ODM4NTA3LCJleHAiOjE2Mjg4ODE3MDd9.LevDEPV0OSASwvlpwIIlTjs0IoX1_Z5RsR_vHfqmHL8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8005/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "<h4>This request is to log out from system </h4>"
+					},
+					"response": [
+						{
+							"name": "success - logout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8005/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.logOutSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.2190\"\r\n}"
+						},
+						{
+							"name": "unauthorized - logout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8005/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.2066\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "Adnan@estate.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Aa@12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "<h4>This request is to log in to system </h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n  <li>password *:  [\n                    'required',\n                    'string',\n                    'max:64',\n                    'min:8',              \n                    'regex:/[a-z]/',      \n                    'regex:/[A-Z]/',     \n                    'regex:/[0-9]/',      \n                    'regex:/[@$!%*#?&]/', \n                ]</li>\n  <li>user name *: required|email|max:50</li>\n</ul>"
+					},
+					"response": [
+						{
+							"name": "success - login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "Adnan@estate.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Aa@12345",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4ODM4NDcwLCJleHAiOjE2Mjg4ODE2NzB9.Ap_9PrX_Q2TkNtIN5v-rI6UJmig7O8n3NIC5sUGCiK4\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"3.7479\"\r\n}"
+						},
+						{
+							"name": "unauthorized - login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "Adnan@estate.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Aa@123452",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.2066\"\r\n}"
+						}
+					]
+				}
+			],
+			"description": "<h4>This request is to logout  </h4>"
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "addAppointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4NjkxNjAxLCJleHAiOjE2Mjg3MzQ4MDF9.yjz1h7VnqCwZtjEqCi06VNBQhZFqwcaC9A4rJMUGXec",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "adnan23",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "adnan223",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "222222222223",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "adnan@gmail.com2",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2021-10-22",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "CM12LB",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "16:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/customer/appointment/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"customer",
+								"appointment",
+								"add"
+							]
+						},
+						"description": "<h4>This request is to add Appointment by customer</h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>email*: required|email|max:50</li>\n<li>name*: required|max:50|min:5</li>\n<li>surname*: required|max:50|min:5</li>\n<li>phone*: required|max:15|min:9</li>\n<li>date*: required|max:10|date|date_format:Y-m-d|after_or_equal:today</li>\n<li>time*: required|date_format:H:i|after:11:00|before:20:00</li>\n<li>address*: required|max:50|min:3</li>\n</ul>"
+					},
+					"response": [
+						{
+							"name": "success - addAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "adnan23",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "adnan223",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "222222222223",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com2",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/customer/appointment/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"customer",
+										"appointment",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.AppointmentStoreSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.6959\"\r\n}"
+						},
+						{
+							"name": "validation - addAppointments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "surname",
+											"value": "ahmet",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "5522941075",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2021-10-22",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "CM12LB",
+											"type": "text"
+										},
+										{
+											"key": "time",
+											"value": "16:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/customer/appointment/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"customer",
+										"appointment",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": {\r\n                \"email\": [\r\n                    \"The email field is required.\"\r\n                ],\r\n                \"name\": [\r\n                    \"The name field is required.\"\r\n                ],\r\n                \"surname\": [\r\n                    \"The surname field is required.\"\r\n                ],\r\n                \"phone\": [\r\n                    \"The phone field is required.\"\r\n                ],\r\n                \"time\": [\r\n                    \"The time field is required.\"\r\n                ],\r\n                \"address\": [\r\n                    \"The address field is required.\"\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1273\"\r\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "UserCrudController",
+			"item": [
+				{
+					"name": "addUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzc0MDcyLCJleHAiOjE2Mjg4MTcyNzJ9.UCEIjyQfD3atWQsLGmVYEdq2oLbz7bAcrIJxjBt4mvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "adnan mehrat",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "adnan@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "adnan001@A",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "05522941075",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/user/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"user",
+								"add"
+							]
+						},
+						"description": "<h4>This request is to add user by admin</h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>email*: required|email|max:50</li>\n<li>fullName*: required|max:50|min:5</li>\n<li>password*: [\n                    'required',\n                    'string',\n                    'max:64',\n                    'min:8',              \n                    'regex:/[a-z]/',    \n                    'regex:/[A-Z]/',      \n                    'regex:/[0-9]/',      \n                    'regex:/[@$!%*#?&]/', \n                ]\n<li>phone*: required|max:15|min:9</li>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - addUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userID",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/add?fullName=adnan mehrat&email=adnan@gmail.comddsdlfgfg&password=adnan001@A&phone=05522941075",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"add"
+									],
+									"query": [
+										{
+											"key": "fullName",
+											"value": "adnan mehrat"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.comddsdlfgfg"
+										},
+										{
+											"key": "password",
+											"value": "adnan001@A"
+										},
+										{
+											"key": "phone",
+											"value": "05522941075"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - addUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fullName",
+											"value": "adnan mehrat",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.comddsdlfgfg",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "adnan001@A",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "05522941075",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.UserStoreSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.4187\"\r\n}"
+						},
+						{
+							"name": "validation - addUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"add"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": {\r\n                \"email\": [\r\n                    \"The email field is required.\"\r\n                ],\r\n                \"fullName\": [\r\n                    \"The full name field is required.\"\r\n                ],\r\n                \"password\": [\r\n                    \"The password field is required.\"\r\n                ],\r\n                \"phone\": [\r\n                    \"The phone field is required.\"\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1420\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzk0NDA0LCJleHAiOjE2Mjg4Mzc2MDR9.KplZHh_0GLPHKrqizoFyh_X-_OYQ22CDc4FTxLuqU9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "adnan mehrat",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "adnan@gmail.comddsdadnan",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "adnan001@A",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "05522941075",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "birthDate",
+									"value": "2020-10-11",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tempFreezing",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/user/update/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"user",
+								"update",
+								"2"
+							]
+						},
+						"description": "<h4>This request is to update user by admin</h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>email*: required|email|max:50</li>\n<li>fullName*: required|max:50|min:5</li>\n<li>password*: [\n                    'required',\n                    'string',\n                    'max:64',\n                    'min:8',              \n                    'regex:/[a-z]/',    \n                    'regex:/[A-Z]/',      \n                    'regex:/[0-9]/',      \n                    'regex:/[@$!%*#?&]/', \n                ]\n<li>phone*: required|max:15|min:9</li>\n\n<li>gender: max:1|integer</li>\n<li>birthDate: max:10|date|date_format:Y-m-d|before:today</li>\n<li>tempFreezing: max:1|integer</li>\n\n\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - updateUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fullName",
+											"value": "adnan mehrat",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.comddsdadnan",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "adnan001@A",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "05522941075",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "birthDate",
+											"value": "2020-10-11",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/update/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"update",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - updateUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fullName",
+											"value": "adnan mehrat",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.comddsdadnan",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "adnan001@A",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "05522941075",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "birthDate",
+											"value": "2020-10-11",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/update/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"update",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.UserUpdateSuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.2495\"\r\n}"
+						},
+						{
+							"name": "validation - updateUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fullName",
+											"value": "adnan mehrat",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "adnan@gmail.comddsdadnan",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "adnan001@A",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "phone",
+											"value": "05522941075",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "gender",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "birthDate",
+											"value": "2020-10-11",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/update/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"update",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": {\r\n                \"email\": [\r\n                    \"The email field is required.\"\r\n                ],\r\n                \"fullName\": [\r\n                    \"The full name field is required.\"\r\n                ],\r\n                \"password\": [\r\n                    \"The password field is required.\"\r\n                ],\r\n                \"phone\": [\r\n                    \"The phone field is required.\"\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1321\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzk0NDA0LCJleHAiOjE2Mjg4Mzc2MDR9.KplZHh_0GLPHKrqizoFyh_X-_OYQ22CDc4FTxLuqU9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8005/api/user/delete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"2"
+							]
+						},
+						"description": "<h4>This request is to delete user</h4>\n<p><strong>inputs in the request  like below:</strong></p>\n<ul>\n    <li>userID*: http://localhost:8005/api/user/delete/{userID}</li>\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - deleteUer",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/delete/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "fail - deleteUser",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/delete/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": \"response.AppointmentDestroyFail\"\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1645\"\r\n}"
+						},
+						{
+							"name": "success - deleteUser",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8005/api/user/delete/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"message\": \"response.UserDestroySuccess\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1606\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "selectUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzk0NDA0LCJleHAiOjE2Mjg4Mzc2MDR9.KplZHh_0GLPHKrqizoFyh_X-_OYQ22CDc4FTxLuqU9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8005/api/user/select/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"user",
+								"select",
+								"2"
+							]
+						},
+						"description": "<h4>This request is to select user</h4>\n<p><strong>inputs in the request  like below:</strong></p>\n<ul>\n    <li>userID*: http://localhost:8005/api/user/select/{userID}</li>\n\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - selectUser",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8005/api/user/select/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"select",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - selectUser",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8005/api/user/select/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"select",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"userID\": 2,\r\n        \"roleID\": 1,\r\n        \"fullName\": \"adnan mehrat\",\r\n        \"email\": \"adnan@gmail.comddsdadnan\",\r\n        \"phone\": \"05522941075\",\r\n        \"tempFreezing\": 1,\r\n        \"gender\": 1,\r\n        \"birthDate\": \"2020-10-11\",\r\n        \"created_at\": \"2021-08-12T13:02:20.000000Z\",\r\n        \"updated_at\": \"2021-08-12T19:03:53.000000Z\"\r\n    },\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1201\"\r\n}"
+						},
+						{
+							"name": "fail - selectAppointments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/select/22",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"select",
+										"22"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"message\": \"response.UserSelectionFail\"\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1182\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "listUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsInVzZXJJbmZvIjp7ImZ1bGxOYW1lIjoiQWRuYW4ifSwiaWF0IjoxNjI4Nzk0NDA0LCJleHAiOjE2Mjg4Mzc2MDR9.KplZHh_0GLPHKrqizoFyh_X-_OYQ22CDc4FTxLuqU9k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "perPage",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "searchValue",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tempFreezing",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8005/api/user/pagination",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"api",
+								"user",
+								"pagination"
+							]
+						},
+						"description": "<h4>This request is to list users </h4>\n<p><strong>inputs in the body of this request are like below:</strong></p>\n<ul>\n    <li>page*: required|max:25</li>\n<li>perPage*: required|max:25</li>\n<li>tempFreezing*: required|max:1</li>\n<li>searchValue: max:30</li>\n</ul>"
+					},
+					"response": [
+						{
+							"name": "unauthorized - listUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "perPage",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "searchValue",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/pagination",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"pagination"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        \"response.unauthorized\"\r\n    ],\r\n    \"status\": \"response.unauthorized\",\r\n    \"execution_time\": \"0.0751\"\r\n}"
+						},
+						{
+							"name": "success - listUsers",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "perPage",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "searchValue",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/pagination",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"pagination"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": [\r\n        {\r\n            \"fullName\": \"Adnan\",\r\n            \"email\": \"Adnan@estate.com\",\r\n            \"phone\": null,\r\n            \"tempFreezing\": 0,\r\n            \"gender\": 0,\r\n            \"birthDate\": null\r\n        },\r\n        {\r\n            \"fullName\": \"adnan mehrat\",\r\n            \"email\": \"adnan@gmail.comddsdlfgfg\",\r\n            \"phone\": \"05522941075\",\r\n            \"tempFreezing\": 0,\r\n            \"gender\": 0,\r\n            \"birthDate\": null\r\n        }\r\n    ],\r\n    \"numberOfPage\": 1,\r\n    \"count\": 2,\r\n    \"status\": \"success\",\r\n    \"execution_time\": \"0.1296\"\r\n}"
+						},
+						{
+							"name": "validation - listUsers",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "perPage",
+											"value": "10",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "searchValue",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "tempFreezing",
+											"value": "0",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8005/api/user/pagination",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8005",
+									"path": [
+										"api",
+										"user",
+										"pagination"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"error\": {\r\n            \"page\": [\r\n                \"The page field is required.\"\r\n            ],\r\n            \"perPage\": [\r\n                \"The per page field is required.\"\r\n            ],\r\n            \"tempFreezing\": [\r\n                \"The temp freezing field is required.\"\r\n            ]\r\n        }\r\n    },\r\n    \"status\": \"fail\",\r\n    \"execution_time\": \"0.1289\"\r\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
