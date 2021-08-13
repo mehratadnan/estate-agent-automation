@@ -211,6 +211,7 @@ class UserCrudController extends Controller
     //checkRequest function to validate inputs
     private function checkRequest($request,$ctrl,$id)
     {
+        // check if request comes from admin
         $decoded = $request->get('decoded');
         $user = User::find($decoded->userID);
 

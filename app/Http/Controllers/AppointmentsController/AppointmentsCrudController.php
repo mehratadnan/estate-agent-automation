@@ -3,23 +3,23 @@
 
 /*
  **************************************************************************************************************
-                    _____________#This controller is about Assignation management#_____________
+                    _____________#This controller is about Appointment management#_____________
 
-    -By this controller you can do CRUD operations with users
+    -By this controller you can do CRUD operations with Appointment
 
     -CRUD = Create / Read / Update / Delete
 
-    -store function to store Assignation to database
+    -store function to store Appointment to database
 
-    -update function  to update one Assignation
+    -update function  to update one Appointment
 
-    -destroy function  to delete one Assignation
+    -destroy function  to delete one Appointment
 
-    -show function  to return one Assignation
+    -show function  to return one Appointment
 
     -checkRequest function to validate inputs
 
-    -pagination function  to paginate all Assignation with selected inputs
+    -pagination function  to paginate all Appointments with selected inputs
 
 
  **************************************************************************************************************
@@ -50,11 +50,13 @@ class AppointmentsCrudController extends Controller
         $checkvalidation = $this->checkRequest($request, "addAppointment","");
         if ($checkvalidation === true) {
             try {
+                // do request to check if postcode is right and if right get long address
                 $response = $this->extractAddress($request->address);
                 if($response === 0){
                     return $this->response->fail(['message'=> __("response.InvalidPostcode")]);
                 }
                 $request['longAddress'] = $response;
+                // do request to get distance and duration
 
                 $response = $this->extractDistanceAndDuration($request->address,$this->postCode,$request->time);
                 $request['distance'] = $response['distance'];
@@ -62,6 +64,7 @@ class AppointmentsCrudController extends Controller
                 $request['checkoutTime'] = $response['checkoutTime'];
                 $request['returnTime'] = $response['returnTime'];
 
+                // create Appointment
                 Appointment::create($request->all());
 
                 return $this->response->success(['message' => __("response.AppointmentStoreSuccess")]);
@@ -90,6 +93,21 @@ class AppointmentsCrudController extends Controller
                 // find Appointment  to update
                 $appointment = Appointment::find($id);
                 if (!empty($appointment)) {
+                    // do request to check if postcode is right and if right get long address
+                    $response = $this->extractAddress($request->address);
+                    if($response === 0){
+                        return $this->response->fail(['message'=> __("response.InvalidPostcode")]);
+                    }
+                    $request['longAddress'] = $response;
+                    // do request to get distance and duration
+
+                    $response = $this->extractDistanceAndDuration($request->address,$this->postCode,$request->time);
+                    $request['distance'] = $response['distance'];
+                    $request['time'] = $response['time'];
+                    $request['checkoutTime'] = $response['checkoutTime'];
+                    $request['returnTime'] = $response['returnTime'];
+
+                    // update Appointment
                     $appointment->update($request->all());
                     return $this->response->success(['message'=>__("response.AppointmentUpdateSuccess")]);
                 }
@@ -251,6 +269,8 @@ class AppointmentsCrudController extends Controller
                 if(empty($appointment)){
                     return $this->response->fail(['message'=>__("response.AppointmentSelectionFail")]);
                 }
+
+                // check if user if free in needed hours
                 $freeUser = Appointment::where('tempFreezing','=',0 )
                     ->where(function ($query) use ($request,$appointment) {
                         $query->where('returnTime','>=',$appointment->checkoutTime)
@@ -267,7 +287,6 @@ class AppointmentsCrudController extends Controller
                     return $this->response->fail(__("response.TheUserIsNotAvailableDuringTheseHours"));
                 }
 
-                // find Appointment  to update
                 if (!empty($appointment)) {
                     $appointment->update($request->all());
                     return $this->response->success(['message'=>__("response.AppointmentUpdateSuccess")]);
@@ -315,6 +334,7 @@ class AppointmentsCrudController extends Controller
                 'time' => 'required|date_format:H:i|after:11:00|before:20:00',
                 'address' => 'required|max:50|min:3',
                 'userID' => 'required|max:50|min:1',
+                'tempFreezing' => 'required|max:1',
             ]);
         }else if($ctrl === "listAppointment") {
             //Request Validator
@@ -347,7 +367,7 @@ class AppointmentsCrudController extends Controller
         return $response;
     }
 
-    // this function to send get request
+    // this function to send extract Long Address request
     public function extractAddress($url)
     {
         $response = json_decode($this->getRequest($url));
@@ -360,7 +380,7 @@ class AppointmentsCrudController extends Controller
     }
 
 
-    // this function to send get request
+    // this function to  get Distance And Duration from googleapis
     public function extractDistanceAndDuration($origin,$destination,$time)
     {
         $url="https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$origin."&destinations=".$destination."&sensor=false&key=".$this->apiGoogleKey;
@@ -388,7 +408,4 @@ class AppointmentsCrudController extends Controller
 
 }
 
-
-
-//SELECT users.userID FROM users users  join appointments appointments on users.userID = appointments.userID and (appointments.checkoutTime >= "17:40" or appointments.returnTime <= "14:40")
 

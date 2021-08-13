@@ -17,6 +17,7 @@ class Controller extends BaseController
     Protected $apiGoogleKey;
 
 
+    // initialize needed providers and variables
     public function __construct(){
         $this->response = new JsonServiceProvider();
         $this->curlServiceProvider = new CurlServiceProvider();
@@ -24,7 +25,6 @@ class Controller extends BaseController
         $this->postCode = $_ENV['POSTCODE'];
         $this->apiPostCode = $_ENV['API_POSTCODE'];
         $this->apiGoogleKey = $_ENV['API_GOOGLE_KEY'];
-
     }
 
     // re decorator data by removing unneeded keys from json
