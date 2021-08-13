@@ -1,15 +1,23 @@
-# Laravel-NodeJS-Customer-Crud-Operations-With-MVC-
-Project Description  An application to be written with Laravel should display the data it retrieves in JSON format from an application to be written with Node.js as a table. 
-
-
-**Technical Requirements**  
-- The Node.js application will depend on MariaDB or MySQL. 
-- Laravel application will not depend on any database. 
-- AJAX or Fetch API can be used in the request to be made from the Laravel application.
-- Bootstrap Table or DataTable (https://datatables.net/) can be used on the frontend.
-- Database table name "customer" and base fields: "full_name", "email", "password", "birth_date", "is_deleted"
+# estate agent automation
+a UK estate agent named Iceberg Estates; It has difficulty keeping records of which house its employees will show, when and to which customers. The company manager, who wants to use his employees more effectively, especially wants to be able to control the length of the appointments, the time they allocate for appointments, and all these appointments without conflicts. In order to solve these problems, the company needs an application that simulates the scenario.
 
 
 **Documentation** 
-- To start Laravel server write this command on terminal : php -S localhost:8000 -t public
-- To try requests you can use (customer requests in laravel.postman_collection) file which is will work on postman
+- https://documenter.getpostman.com/view/15155481/Tzz7NHwq   by this link you can access to postman documentation.
+- To try requests you can use (proje.postman_collection) file on postman.
+
+
+**Default  User** 
+- email = Adnan@estate.com
+- password = Aa@12345
+
+
+**Run  Project** 
+- Download project and run "composer global update" in terminal
+- To create database run "php artisan migrate:fresh"
+- To create user run "php artisan db:seed"
+- To start project run "php -s localhost:8005 -t public" 
+
+
+
+
