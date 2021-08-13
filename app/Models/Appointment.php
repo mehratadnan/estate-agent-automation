@@ -36,7 +36,7 @@ class Appointment extends Model implements AuthenticatableContract, Authorizable
         'returnTime',
         'userID',
         'tempFreezing',
-
+        'done',
     ];
 
     /**

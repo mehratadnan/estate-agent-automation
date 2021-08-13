@@ -118,7 +118,7 @@ class AppointmentsCrudController extends Controller
             $id = trim(strip_tags($id));
             if (!empty($id)) {
                 try {
-                    // find Appointment  to update
+                    // find Appointment to update
                     $appointment = Appointment::find($id);
                     if (!empty($appointment)) {
                         $appointment->update(['tempFreezing' => 1]);
@@ -180,6 +180,7 @@ class AppointmentsCrudController extends Controller
                     $appointments->where('appointments.userID','=', $request->userID );
                 }
                 $appointments->where('appointments.tempFreezing','=', $request->tempFreezing)
+                    ->where('appointments.done','like','%'. $request->done.'%')
                     ->where(function ($query) use ($request) {
                         $query->Where('appointments.email','like','%'.$request->searchValue.'%')
                             ->orWhere('appointments.surname','like','%'.$request->searchValue.'%')
@@ -205,6 +206,79 @@ class AppointmentsCrudController extends Controller
 
     }
 
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|object
+     */
+
+    //this Func will update one Appointment
+    public function done(Request $request , $id)
+    {
+        // checkRequest Func checking requests
+        $checkvalidation = $this->checkRequest($request, "", $id);
+        if ($checkvalidation === true) {
+            try {
+                $appointment = Appointment::find($id);
+                // find Appointment  to update
+                if (!empty($appointment)) {
+                    $appointment->update(["done"=>1]);
+                    return $this->response->success(['message'=>__("response.AppointmentUpdateSuccess")]);
+                }
+                return $this->response->fail(__("response.AppointmentUpdateFail"));
+            } catch (\Illuminate\Database\QueryException  $exception) {
+                return $this->response->fail(['message'=>__("response.DatabaseError")]);
+            }
+        }
+        return $this->response->fail(['message'=>$checkvalidation]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse|object
+     */
+
+    //this Func will update one Appointment
+    public function assignment(Request $request , $id)
+    {
+        // checkRequest Func checking requests
+        $checkvalidation = $this->checkRequest($request, "assignment", $id);
+        if ($checkvalidation === true) {
+            try {
+                $appointment = Appointment::find($id);
+                if(empty($appointment)){
+                    return $this->response->fail(['message'=>__("response.AppointmentSelectionFail")]);
+                }
+                $freeUser = Appointment::where('tempFreezing','=',0 )
+                    ->where(function ($query) use ($request,$appointment) {
+                        $query->where('returnTime','>=',$appointment->checkoutTime)
+                            ->Where('checkoutTime','<=',$appointment->checkoutTime);
+                        $query->orWhere(function ($query) use ($request,$appointment) {
+                            $query->where('returnTime','>=',$appointment->returnTime)
+                                ->Where('checkoutTime','<=',$appointment->returnTime);
+                        });
+                    })->where('userID',$request->userID)
+                    ->where('done','=', 0)
+                    ->first();
+
+                if(!empty($freeUser)){
+                    return $this->response->fail(__("response.TheUserIsNotAvailableDuringTheseHours"));
+                }
+
+                // find Appointment  to update
+                if (!empty($appointment)) {
+                    $appointment->update($request->all());
+                    return $this->response->success(['message'=>__("response.AppointmentUpdateSuccess")]);
+                }
+                return $this->response->fail(__("response.AppointmentUpdateFail"));
+            } catch (\Illuminate\Database\QueryException  $exception) {
+                return $this->response->fail(['message'=>__("response.DatabaseError")]);
+            }
+        }
+        return $this->response->fail(['message'=>$checkvalidation]);
+    }
 
     /**
      * @param $request
@@ -240,6 +314,7 @@ class AppointmentsCrudController extends Controller
                 'date' => 'max:10|date|date_format:Y-m-d|after_or_equal:today',
                 'time' => 'required|date_format:H:i|after:11:00|before:20:00',
                 'address' => 'required|max:50|min:3',
+                'userID' => 'required|max:50|min:1',
             ]);
         }else if($ctrl === "listAppointment") {
             //Request Validator
@@ -250,6 +325,11 @@ class AppointmentsCrudController extends Controller
                 'tempFreezing' => 'required|max:1',
                 'date' => 'max:10|min:10',
                 'userID' => 'integer|max:30',
+            ]);
+        }else if($ctrl === "assignment") {
+            //Request Validator
+            $validate = $this->checkValidator($request, [
+                'userID' => 'required|integer|max:30',
             ]);
         }
 
@@ -310,4 +390,5 @@ class AppointmentsCrudController extends Controller
 
 
 
+//SELECT users.userID FROM users users  join appointments appointments on users.userID = appointments.userID and (appointments.checkoutTime >= "17:40" or appointments.returnTime <= "14:40")
 

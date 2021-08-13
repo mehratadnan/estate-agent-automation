@@ -34,6 +34,9 @@ class CreateAppointmentsTable extends Migration
             $table->tinyInteger("tempFreezing")->default(0)
                 ->comment = 'activate 0 / deactivate 1 ';
 
+            $table->tinyInteger("done")->default(0)
+                ->comment = 'not done 0 / done 1 ';
+
             $table->timestamps();
 
         });

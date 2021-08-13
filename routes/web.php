@@ -23,16 +23,24 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         });
     });
 
-    // AppointmentsController ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    $router->group(['prefix' => '/appointment'], function () use ($router) {
-        $router->POST('/pagination', 'AppointmentsController\AppointmentsCrudController@pagination');
-        $router->POST('/add', 'AppointmentsController\AppointmentsCrudController@store');
-        $router->POST('/update/{id}', 'AppointmentsController\AppointmentsCrudController@update');
-        $router->delete('/delete/{id}', 'AppointmentsController\AppointmentsCrudController@destroy');
-        $router->get('/select/{id}', 'AppointmentsController\AppointmentsCrudController@show');
-    });
+    // add Appointments ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    $router->POST('/customer/appointment/add', 'AppointmentsController\AppointmentsCrudController@store');
+
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
+        // AppointmentsController ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        $router->group(['prefix' => '/appointment'], function () use ($router) {
+            $router->POST('/pagination', 'AppointmentsController\AppointmentsCrudController@pagination');
+            $router->POST('/add', 'AppointmentsController\AppointmentsCrudController@store');
+            $router->POST('/update/{id}', 'AppointmentsController\AppointmentsCrudController@update');
+            $router->delete('/delete/{id}', 'AppointmentsController\AppointmentsCrudController@destroy');
+            $router->get('/select/{id}', 'AppointmentsController\AppointmentsCrudController@show');
+            $router->POST('/update/assignment/{id}', 'AppointmentsController\AppointmentsCrudController@assignment');
+            $router->get('/update/assignment/done/{id}', 'AppointmentsController\AppointmentsCrudController@done');
+
+        });
+
+
         // UserController ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         $router->group(['prefix' => '/user'], function () use ($router) {
             $router->POST('/pagination', 'UserController\UserCrudController@pagination');
